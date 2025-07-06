@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="my-container" id="my-container">
+      <div class="contacts-app" id="contacts-app">
+        <button
+          onclick="window.location.href = `./newContactForm.html`"
+          id="add-contact"
+        >
+          +Add Contact
+        </button>
+        <div class="contacts-container" id="contacts-container"></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button
+        class="contact-tab-button"
+        id="contact-tab-button"
+        onclick="window.location.href = `./index.html`"
+      ></button>
+      <button
+        class="favorite-tab-button active"
+        id="favorite-tab-button"
+        onclick="window.location.href = `./favorite.html`"
+      ></button>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script src="script.js" defer></script>
+    <script>
+      let storedContacts = JSON.parse(localStorage.getItem("contactsDB")) || [];
+
+      window.addEventListener("load", function (e) {
+        for (let contact of storedContacts) {
+          if (contact.favorite === true) {
+            contactsContainer.innerHTML += addContact(
+              contact.name,
+              contact.phoneNumber,
+              contact.email,
+              contact.address,
+              contact.favorite
+            );
+          }
+        }
+      });
+
+      document
+        .getElementById("contacts-container")
+        .addEventListener("click", function (e) {
+          if (e.target.id === "favorite-btn") {
+            // e.target.closest(".contact").classList.toggle("favorite");
+
+            const contactElement = e.target.closest(".contact");
+            const contactName = contactElement
+              .querySelector(".contact-name")
+              .textContent.trim();
+
+            for (let contact of storedContacts) {
+              if (contact.name === contactName) {
+                contact.favorite = !contact.favorite;
+                break;
+              }
+            }
+
+            localStorage.setItem("contactsDB", JSON.stringify(storedContacts));
+            location.reload();
+          } else if (e.target.id === "delete-btn") {
+            const contactElement = e.target.closest(".contact");
+            const contactName = contactElement
+              .querySelector(".contact-name")
+              .textContent.trim();
+            storedContacts = storedContacts.filter(
+              (contact) => contact.name !== contactName
+            );
+            localStorage.setItem("contactsDB", JSON.stringify(storedContacts));
+            location.reload();
+          }
+        });
+    </script>
+  </body>
+</html>

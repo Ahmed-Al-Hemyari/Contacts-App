@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="my-container" id="form-page">
+      <div class="add-contact" id="add-contact">
+        <form class="add-form" id="add-form">
+          <label id="alert-name-label">Enter a name</label>
+          <input
+            type="text"
+            placeholder="Type name here"
+            id="name-input"
+            required
+          />
+          <label id="alert-label">Enter a number</label>
+          <input
+            type="text"
+            placeholder="Type phone number here"
+            id="number-input"
+            required
+          />
+          <input type="email" placeholder="Type Email here" id="email-input" />
+          <input
+            type="text"
+            placeholder="Type Address here"
+            id="address-input"
+          />
+          <button type="submit" id="save-contact">Save Contact</button>
+          <!-- <div class="add-form-buttons">
+            <button onclick="addContact()">
+              <img src="./images/check.svg" />
+            </button>
+            <button onclick="closeForm()">
+              <img src="./images/close.svg" />
+            </button>
+          </div> -->
+        </form>
+      </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
+  </body>
+</html>
